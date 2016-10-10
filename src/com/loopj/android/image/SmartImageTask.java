@@ -60,8 +60,7 @@ public class SmartImageTask implements Runnable{
 	}
 
 	public void complete(Bitmap bitmap){
-		if(onCompleteHandler != null && !cancelled){
+		if(onCompleteHandler != null && !cancelled)
 			onCompleteHandler.sendMessage(onCompleteHandler.obtainMessage(BITMAP_READY, bitmap));
-		}
 	}
 }

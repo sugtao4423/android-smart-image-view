@@ -24,13 +24,11 @@ public class ContactImage implements SmartImage{
 		try{
 			Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
 			InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(contentResolver, uri);
-			if(input != null){
+			if(input != null)
 				bitmap = BitmapFactory.decodeStream(input);
-			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-
 		return bitmap;
 	}
 }

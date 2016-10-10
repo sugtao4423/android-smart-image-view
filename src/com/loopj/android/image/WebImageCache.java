@@ -51,11 +51,9 @@ public class WebImageCache{
 			bitmap = getBitmapFromDisk(url);
 
 			// Write bitmap back into memory cache
-			if(bitmap != null){
+			if(bitmap != null)
 				cacheBitmapToMemory(url, bitmap);
-			}
 		}
-
 		return bitmap;
 	}
 
@@ -65,18 +63,16 @@ public class WebImageCache{
 	}
 
 	public void remove(String url){
-		if(url == null){
+		if(url == null)
 			return;
-		}
 
 		// Remove from memory cache
 		memoryCache.remove(getCacheKey(url));
 
 		// Remove from file cache
 		File f = new File(diskCachePath, getCacheKey(url));
-		if(f.exists() && f.isFile()){
+		if(f.exists() && f.isFile())
 			f.delete();
-		}
 	}
 
 	public void clear(){
@@ -88,9 +84,8 @@ public class WebImageCache{
 		if(cachedFileDir.exists() && cachedFileDir.isDirectory()){
 			File[] cachedFiles = cachedFileDir.listFiles();
 			for(File f : cachedFiles){
-				if(f.exists() && f.isFile()){
+				if(f.exists() && f.isFile())
 					f.delete();
-				}
 			}
 		}
 	}
@@ -127,10 +122,8 @@ public class WebImageCache{
 	private Bitmap getBitmapFromMemory(String url){
 		Bitmap bitmap = null;
 		SoftReference<Bitmap> softRef = memoryCache.get(getCacheKey(url));
-		if(softRef != null){
+		if(softRef != null)
 			bitmap = softRef.get();
-		}
-
 		return bitmap;
 	}
 
@@ -139,9 +132,8 @@ public class WebImageCache{
 		if(diskCacheEnabled){
 			String filePath = getFilePath(url);
 			File file = new File(filePath);
-			if(file.exists()){
+			if(file.exists())
 				bitmap = BitmapFactory.decodeFile(filePath);
-			}
 		}
 		return bitmap;
 	}
@@ -151,10 +143,9 @@ public class WebImageCache{
 	}
 
 	private String getCacheKey(String url){
-		if(url == null){
+		if(url == null)
 			throw new RuntimeException("Null url passed in");
-		}else{
+		else
 			return url.replaceAll("[.:/,%?&=]", "+").replaceAll("[+]+", "+");
-		}
 	}
 }
