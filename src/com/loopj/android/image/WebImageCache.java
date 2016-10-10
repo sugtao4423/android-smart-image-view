@@ -90,6 +90,19 @@ public class WebImageCache{
 		}
 	}
 
+	public long getCacheSize(){
+		long fileSize = 0;
+		File cachedFileDir = new File(diskCachePath);
+		if(cachedFileDir.exists() && cachedFileDir.isDirectory()){
+			File[] cachedFiles = cachedFileDir.listFiles();
+			for(File f : cachedFiles){
+				if(f.exists() && f.isFile())
+					fileSize += f.length();
+			}
+		}
+		return fileSize;
+	}
+
 	private void cacheBitmapToMemory(final String url, final Bitmap bitmap){
 		memoryCache.put(getCacheKey(url), new SoftReference<Bitmap>(bitmap));
 	}
