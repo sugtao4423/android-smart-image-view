@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import java.io.InputStream
 import java.net.URL
 
-class WebImage(private val url: String?) : SmartImage {
+class WebImage(private val url: String?, private val userAgent: String?) : SmartImage {
 
     companion object {
         private const val CONNECT_TIMEOUT = 5000
@@ -45,6 +45,9 @@ class WebImage(private val url: String?) : SmartImage {
             val conn = URL(url).openConnection().apply {
                 connectTimeout = CONNECT_TIMEOUT
                 readTimeout = READ_TIMEOUT
+                if (!userAgent.isNullOrEmpty()) {
+                    setRequestProperty("User-Agent", userAgent)
+                }
             }
             bitmap = BitmapFactory.decodeStream(conn.content as InputStream)
         } catch (e: Exception) {

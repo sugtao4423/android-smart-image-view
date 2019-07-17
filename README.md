@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.sugtao4423:android-smart-image-view:1.0.0'
+    implementation 'com.github.sugtao4423:android-smart-image-view:1.1.0'
 }
 ```
 

@@ -19,11 +19,12 @@ class SmartImageView @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     private var currentTask: SmartImageTask? = null
+    var userAgent: String? = null
 
     // Helpers to set image by URL
     @JvmOverloads
     fun setImageUrl(url: String?, fallbackResource: Int? = null, loadingResource: Int? = null, completeListener: SmartImageTask.Companion.OnCompleteListener? = null) {
-        setImage(WebImage(url), fallbackResource, loadingResource, completeListener)
+        setImage(WebImage(url, userAgent), fallbackResource, loadingResource, completeListener)
     }
 
     // Helpers to set image by contact address book id
